@@ -13,13 +13,14 @@ from rl.memory import SequentialMemory
 import gym_model_cartpole
 import sys, os
 
-if len(sys.argv) != 4:
-    print("python train_krl_dqn.py PORTION EPSILON ID!")
+if len(sys.argv) != 5:
+    print("python train_krl_dqn.py PORTION EPSILON GAMMA ID!")
     sys.exit(1)
 
 portion = sys.argv[1]
 test_epsilon = sys.argv[2]
-test_id = sys.argv[3]
+gamma = float(sys.argv[3])
+test_id = sys.argv[4]
 
 register(
     id='CartPole-v2',
@@ -81,11 +82,12 @@ print(model.summary())
 
 memory = SequentialMemory(limit=20000, window_length=1)
 policy = BoltzmannQPolicy()
-dqn = DQNAgent(model=model, nb_actions=nb_actions, memory=memory, nb_steps_warmup=20,
+dqn = DQNAgent(model=model, gamma=gamma, nb_actions=nb_actions, memory=memory, nb_steps_warmup=20,
                target_model_update=0.01, policy=policy)
 dqn.compile(Adam(lr=1e-3), metrics=['mae'])
 
 dqn.fit(env, nb_steps=50000, visualize=False, verbose=1)
+state_errors = env.state_errors
 
 #dqn.save_weights('dqn_{}_weights.h5f'.format(ENV_NAME), overwrite=True)
 
@@ -96,12 +98,12 @@ result3 = dqn.test(env_test2, nb_episodes=nb_episodes, visualize=False)
 
 #test_epsilon = sys.argv[1]
 #test_id = sys.argv[2]
-
-output_file = "outputs/output_dqn_" + test_epsilon + "_" + test_id + ".txt"
+output_file = "outputs/output_dqn_" + portion + "_" + test_epsilon + "_" + str(gamma) + "_" + test_id + ".txt"
 f = open(output_file, 'w') 
 f.write(",".join(map(str,result.history['episode_reward'])) + "\n")
 f.write(",".join(map(str,result3.history['episode_reward'])) + "\n")
 f.write(",".join(map(str,result2.history['episode_reward'])) + "\n")
+f.write(",".join(map(str,np.mean(state_errors, axis=0))) + "\n")
 f.close()
 
 print(result.epoch)
@@ -113,3 +115,4 @@ r_rew = result3.history['episode_reward']
 print("model_0.0 {} +- {}".format(np.mean(r_rew), np.std(r_rew) * 1.96 / np.sqrt(20)))
 r_rew = result2.history['episode_reward']
 print("real {} +- {}".format(np.mean(r_rew), np.std(r_rew) * 1.96 / np.sqrt(20)))
+print(",".join(map(str,np.mean(state_errors, axis=0))))

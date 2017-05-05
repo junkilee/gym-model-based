@@ -53,6 +53,15 @@ class ModelBasedCartPoleEnv(gym.Env):
     self.action_translation = [-1, 1]
     self.epsilon = epsilon
 
+    self.gravity = 9.8
+    self.masscart = 1.0
+    self.masspole = 0.1
+    self.total_mass = (self.masspole + self.masscart)
+    self.length = 0.5 # actually half the pole's length
+    self.polemass_length = (self.masspole * self.length)
+    self.force_mag = 10.0
+    self.tau = 0.02  # seconds between state updates
+
     self.theta_threshold_radians = 12 * 2 * math.pi / 360
     self.x_threshold = 2.4
 
@@ -62,6 +71,8 @@ class ModelBasedCartPoleEnv(gym.Env):
                      np.finfo(np.float32).max])
     
     self.observation_space = gym.spaces.Box(-high, high)
+
+    self.state_errors = []
 
     self._seed(seed)
 
@@ -77,6 +88,9 @@ class ModelBasedCartPoleEnv(gym.Env):
     # 2**31.
     seed2 = seeding.hash_seed(seed1 + 1) % 2**31
     return [seed1, seed2]
+
+  def reset_stat(self):
+    self.state_errors = []
 
   def _reset(self):
     if self.sstate_mode == 'env':
@@ -120,8 +134,38 @@ class ModelBasedCartPoleEnv(gym.Env):
     if self.num_steps >= self.max_episode_steps:
       done = True
 
+    true_state, true_reward, true_done, _ = self._real_step(self.current_state, action)
+
+    self.state_errors += [np.abs(true_state - next_state)]
+
     self.current_state = next_state
     return self.current_state, reward, done, {}
+
+  def _real_step(self, state, action):
+    x, x_dot, theta, theta_dot = state
+    force = self.force_mag if action==1 else -self.force_mag
+    costheta = math.cos(theta)
+    sintheta = math.sin(theta)
+    temp = (force + self.polemass_length * theta_dot * theta_dot * sintheta) / self.total_mass
+    thetaacc = (self.gravity * sintheta - costheta* temp) / (self.length * (4.0/3.0 - self.masspole * costheta * costheta / self.total_mass))
+    xacc  = temp - self.polemass_length * thetaacc * costheta / self.total_mass
+    x  = x + self.tau * x_dot
+    x_dot = x_dot + self.tau * xacc
+    theta = theta + self.tau * theta_dot
+    theta_dot = theta_dot + self.tau * thetaacc
+    self.state = (x,x_dot,theta,theta_dot)
+    done =  x < -self.x_threshold \
+            or x > self.x_threshold \
+            or theta < -self.theta_threshold_radians \
+            or theta > self.theta_threshold_radians
+    done = bool(done)
+
+    if not done:
+      reward = 1.0
+    else:
+      reward = 0.0
+
+    return np.array(self.state), reward, done, {}
 
 if __name__ == '__main__':
 

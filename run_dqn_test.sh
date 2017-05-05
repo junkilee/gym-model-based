@@ -24,5 +24,8 @@ source activate tensorflow
 #nvidia-smi
 #ls -l /usr/local
 IND=$SGE_TASK_ID
-echo "Portion ($PORTION) - Epsilon ($EPSILON) - ID ($SGE_TASK_ID)"
-python train_krl_dqn.py ${PORTION} ${EPSILON} ${IND}
+if [ -z "$GAMMA" ]; then
+  GAMMA = 0.99
+fi
+echo "Portion ($PORTION) - Epsilon ($EPSILON) - Gamma ($GAMMA) - ID ($SGE_TASK_ID)"
+python train_krl_dqn.py ${PORTION} ${EPSILON} ${GAMMA} ${IND} > /dev/null 2>/dev/null

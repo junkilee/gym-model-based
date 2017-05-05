@@ -20,7 +20,7 @@ if len(sys.argv) != 3:
     print("python graph_off.py START_ID END_ID!")
     sys.exit(1)
 
-epsilons = [0.2, 0.4, 0.6, 0.8, 1.0]
+epsilons = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 start_id = int(sys.argv[1])
 end_id = int(sys.argv[2])
 

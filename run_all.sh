@@ -1,29 +1,48 @@
-qsub -v PORTION=1.0 -v EPSILON=0.0 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.01 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.02 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.03 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.04 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.05 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.06 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.07 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.08 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.09 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.1 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.11 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.12 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.13 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.14 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.15 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.16 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.17 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.18 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.19 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.2 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.3 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.4 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.5 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.6 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.7 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.8 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=0.9 -t 1-50 run_dqn_test.sh
-qsub -v PORTION=1.0 -v EPSILON=1.0 -t 1-50 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.99 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.98 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.95 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.93 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.90 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.8 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.85 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.7 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.75 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.6 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.65 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.5 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.4 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.3 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.2 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=1.0 -v EPSILON=0.0 -v GAMMA=0.1 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.99 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.98 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.95 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.93 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.90 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.8 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.85 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.7 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.75 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.6 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.65 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.5 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.4 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.3 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.2 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.5 -v EPSILON=0.0 -v GAMMA=0.1 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.99 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.98 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.95 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.93 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.90 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.8 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.85 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.7 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.75 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.6 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.65 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.5 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.4 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.3 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.2 -t 1-300 run_dqn_test.sh
+qsub -v PORTION=0.1 -v EPSILON=0.0 -v GAMMA=0.1 -t 1-300 run_dqn_test.sh
